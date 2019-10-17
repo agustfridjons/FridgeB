@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="#" th:action="@{/addrecipe}" th:object="${recipe}" method="post">
+    <label for="name">name</label>
+    <input type="text" th:field="*{name}" id="name" placeholder="name">
+    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+    <label for="description">Description</label>
+    <input type="text" th:field="*{description}" id="description" placeholder="Description">
+    <span th:if="${#fields.hasErrors('description')}" th:errors="*{decription}"></span>
+    <label for="rating">Rating</label>
+    <input type="text" th:field="*{rating}" id="rating" placeholder="Rating">
+    <span th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"></span>
+    <input type="submit" value="Add recipe">
+</form>
+
+</body>
+</html>
+
+
+
+<!--<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>FridgeBuddy</title>
+</head>
+<body>
+    <h1>Add a recipe</h1>
+    <form action="#" th:action="@{/addrecipe}" th:object="${recipe}" method="post">
+        <label for="name">Name</label>
+        <input type="text" th:field="*{name}" id="name" placeholder="Name">
+        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+        <label for="description">Description</label>
+        <input type="text" th:field="*{description}" id="description" placeholder="Description">
+        <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+        <label for="rating">Rating</label>
+        <input type="text" th:field="*{rating}" id="rating" placeholder="Rating">
+        <span th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"></span>
+        <input type="submit" value="Add Recipe">
+    </form>
+
+</body>
+</html>-->
