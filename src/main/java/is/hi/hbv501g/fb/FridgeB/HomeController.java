@@ -24,7 +24,7 @@ public class HomeController {
 
     @RequestMapping("/")
     public String Home(Model model){
-        model.addAttribute("recipe", recipeService.findAll());
+        model.addAttribute("Recipes", recipeService.findAll());
         return "Velkominn";
     }
 
@@ -33,8 +33,9 @@ public class HomeController {
         if(results.hasErrors()){
             return "add-recipe";
         }
+        System.out.println(recipe.getName());
         recipeService.save(recipe);
-        model.addAttribute("recipe", recipeService.findAll());
+        model.addAttribute("Recipes", recipeService.findAll());
         return "Velkominn";
     }
 
@@ -47,7 +48,7 @@ public class HomeController {
     public String deleteRecipe(@PathVariable("id") long id, Model model){
         Recipe recipe = recipeService.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid Recipe Id"));
         recipeService.delete(recipe);
-        model.addAttribute("recipe", recipeService.findAll());
+        model.addAttribute("Recipes", recipeService.findAll());
         return "Velkominn";
     }
 

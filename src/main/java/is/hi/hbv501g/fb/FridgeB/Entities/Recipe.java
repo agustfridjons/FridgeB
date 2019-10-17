@@ -16,6 +16,9 @@ public class Recipe {
     private String description;
     private Double rating;
 
+    public Recipe(){
+    }
+
     public Recipe(String name, String description, Double rating) {
         this.name = name;
         this.description = description;

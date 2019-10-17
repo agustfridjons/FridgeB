@@ -1,9 +1,9 @@
 package is.hi.hbv501g.fb.FridgeB.Services;
 
-import is.hi.hbv501g.fb.FridgeB.Entities.Recipe;
+        import is.hi.hbv501g.fb.FridgeB.Entities.Recipe;
 
-import java.util.List;
-import java.util.Optional;
+        import java.util.List;
+        import java.util.Optional;
 
 public interface RecipeService {
     Recipe save(Recipe recipe);
