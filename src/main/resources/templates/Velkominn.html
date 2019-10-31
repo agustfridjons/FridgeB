@@ -26,6 +26,8 @@
                     <td th:text="${recipe.name}"></td>
                     <td th:text="${recipe.description}"></td>
                     <td th:text="${recipe.rating}"></td>
+                    <td th:text="${recipe.diets}"></td>
+                    <td th:text="${recipe.diets[0] }"></td>
                     <td><a th:href="@{/delete/{id}(id=${recipe.id})}">Delete</a></td>
                 </tr>
                 </tbody>
