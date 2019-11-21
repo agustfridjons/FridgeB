@@ -1,8 +1,9 @@
 package is.hi.hbv501g.fb.FridgeB.Entities;
 
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Recipe {
@@ -15,18 +16,19 @@ public class Recipe {
     private String description;
     private Double rating;
 
+    /*
     @ElementCollection(targetClass = Diet.class)
     @Column(name = "diet", nullable=false)
     @CollectionTable(name="recipe_diet", joinColumns = {@JoinColumn(name = "recipe_id")})
     public Set<Diet> diet;
-
+*/
     public Recipe(){}
 
-    public Recipe(String name, String description, Double rating, HashSet<Diet> diet) {
+    public Recipe(String name, String description, Double rating/*, HashSet<Diet> diet*/) {
         this.name = name;
         this.description = description;
         this.rating = rating;
-        this.diet = diet;
+        //this.diet = diet;
     }
 
     public long getId() {

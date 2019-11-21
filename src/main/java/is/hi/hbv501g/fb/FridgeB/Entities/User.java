@@ -15,6 +15,10 @@ public class User {
     public User() {
     }
 
+    public User(String uName, String password) {
+        this.uName = uName;
+        this.password = password;
+    }
 
     public long getId() {
         return id;
@@ -45,8 +49,4 @@ public class User {
         this.password = password;
     }
 
-    public User(String uName, String password) {
-        this.uName = uName;
-        this.password = password;
-    }
 }

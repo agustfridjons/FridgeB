@@ -1,6 +1,5 @@
 package is.hi.hbv501g.fb.FridgeB;
 
-import is.hi.hbv501g.fb.FridgeB.Entities.Diet;
 import is.hi.hbv501g.fb.FridgeB.Entities.Recipe;
 import is.hi.hbv501g.fb.FridgeB.Services.RecipeService;
 import is.hi.hbv501g.fb.FridgeB.Services.UserService;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-import java.util.HashSet;
 import java.util.List;
 
 @Controller
@@ -66,18 +64,19 @@ public class HomeController {
     @RequestMapping(value= "/recipeSearch", method = RequestMethod.POST)
     public String searchRecipe(@RequestParam(value = "search", required = false) String search, Model model){
         List<Recipe> recipe = recipeService.findByName(search);
-        model.addAttribute("Recipe", recipe);
+        System.out.println(recipe.get(0));
+        model.addAttribute("Recipes", recipe);
         return "Velkominn";
     }
 
-    @RequestMapping(value="/makedata", method = RequestMethod.GET)
+    @RequestMapping("/makedata")
     public String makeData(Model model){
         System.out.println("make recipes");
-        HashSet<Diet> diets = new HashSet<>();
+        /*HashSet<Diet> diets = new HashSet<>();
         diets.add(Diet.CLASSIC);
-        diets.add(Diet.VEGITERIAN);
+        diets.add(Diet.VEGITERIAN);*/
         for (int i = 1; i <= 3; i++) {
-            this.recipeService.save(new Recipe("Good food "+i," recipe with ",Double.valueOf(i),diets));
+            this.recipeService.save(new Recipe("Good food "+i," recipe with ",Double.valueOf(i)/*,diets*/));
         }
         //User tempUser = new User("Karl Jóhann","pass123");
         model.addAttribute("Recipes", recipeService.findAll());
