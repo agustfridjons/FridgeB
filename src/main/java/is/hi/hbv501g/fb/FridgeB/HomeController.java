@@ -2,11 +2,8 @@ package is.hi.hbv501g.fb.FridgeB;
 
 import is.hi.hbv501g.fb.FridgeB.Entities.Diet;
 import is.hi.hbv501g.fb.FridgeB.Entities.Recipe;
-import is.hi.hbv501g.fb.FridgeB.Entities.User;
-import is.hi.hbv501g.fb.FridgeB.Entities.ViewLog;
 import is.hi.hbv501g.fb.FridgeB.Services.RecipeService;
 import is.hi.hbv501g.fb.FridgeB.Services.UserService;
-import is.hi.hbv501g.fb.FridgeB.Services.ViewLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.HashSet;
 import java.util.List;
 
@@ -26,12 +21,10 @@ import java.util.List;
 public class HomeController {
 
     private RecipeService recipeService;
-    private ViewLogService viewLogService;
     private UserService userService;
 
     @Autowired
-    public HomeController(RecipeService recipeService, ViewLogService viewLogService, UserService userService){
-        this.viewLogService = viewLogService;
+    public HomeController(RecipeService recipeService, UserService userService){
         this.recipeService = recipeService;
         this.userService = userService;
     }
@@ -65,13 +58,13 @@ public class HomeController {
         return "Velkominn";
     }
 
-    @RequestMapping("/search")
+    @RequestMapping("/recipeSearch")
     public String search(){
         return "search";
     }
 
     @RequestMapping(value= "/recipeSearch", method = RequestMethod.POST)
-    public String searchMovie(@RequestParam(value = "search", required = false) String search, Model model){
+    public String searchRecipe(@RequestParam(value = "search", required = false) String search, Model model){
         List<Recipe> recipe = recipeService.findByName(search);
         model.addAttribute("Recipe", recipe);
         return "Velkominn";
@@ -79,28 +72,16 @@ public class HomeController {
 
     @RequestMapping("/makedata")
     public String makeData(Model model){
+        System.out.println("make recipes");
         HashSet<Diet> diets = new HashSet<>();
-        diets.add(Diet.NORMAL);
+        diets.add(Diet.CLASSIC);
         diets.add(Diet.VEGITERIAN);
-        for (int i = 0; i < 3; i++) { this.recipeService.save(new Recipe("Good food"+i," recipe with ",Double.valueOf(i),diets));
+        for (int i = 1; i <= 3; i++) {
+            this.recipeService.save(new Recipe("Good food "+i," recipe with ",Double.valueOf(i),diets));
         }
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        User tempUser = new User("Karl Jóhann","pass123");
-        List<Recipe> tempRecipe = recipeService.findAll();
-        this.userService.save(tempUser);
-        try {
-            viewLogService.save(new ViewLog(tempRecipe.get(0),tempUser,sdf.parse("21/12/2012"),sdf.parse("31/12/2013") ));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        //User tempUser = new User("Karl Jóhann","pass123");
         model.addAttribute("Recipes", recipeService.findAll());
         return "Velkominn";
-    }
-
-    @RequestMapping("/views")
-    public String allViews(Model model){
-        model.addAttribute("viewLog", viewLogService.findAll());
-        return "rentals";
     }
 
 }

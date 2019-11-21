@@ -1,9 +1,7 @@
 package is.hi.hbv501g.fb.FridgeB.Entities;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -21,11 +19,6 @@ public class Recipe {
     @Column(name = "diet", nullable=false)
     @CollectionTable(name="recipe_diet", joinColumns = {@JoinColumn(name = "recipe_id")})
     public Set<Diet> diet;
-
-    @OneToMany(mappedBy = "recipe")
-    private List<ViewLog> useCase = new ArrayList<>();
-    public Recipe(){
-    }
 
     public Recipe(String name, String description, Double rating, HashSet<Diet> diet) {
         this.name = name;

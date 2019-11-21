@@ -1,8 +1,6 @@
 package is.hi.hbv501g.fb.FridgeB.Entities;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "USER")
@@ -13,17 +11,6 @@ public class User {
 
     public String uName;
     public String password;
-
-    @OneToMany(mappedBy = "user")
-    private List<ViewLog> viewList = new ArrayList<>();
-
-    public List<ViewLog> getViewList() {
-        return viewList;
-    }
-
-    public void setViewList(List<ViewLog> viewList) {
-        this.viewList = viewList;
-    }
 
     public User() {
     }

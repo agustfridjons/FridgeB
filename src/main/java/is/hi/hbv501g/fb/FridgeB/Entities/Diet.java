@@ -5,5 +5,6 @@ public enum Diet {
     VEGITERIAN,
     VEGAN,
     PESCATARIAN,
-    NORMAL
+    CLASSIC,
+    GlUTENFREE
 }

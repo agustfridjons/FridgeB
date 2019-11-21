@@ -8,32 +8,34 @@
 <body>
     <h1>Fridge Buddy</h1>
     <h3>What should we have for dinner?</h3>
-    <div th:switch="${Recipes}">
+    <div th:switch="${recipes}">
         <h2 th:case="null">No recipes yet!</h2>
         <div th:case="*">
-            <h2>recipes</h2>
+            <h2>Recipes</h2>
             <table>
                 <thead>
                 <tr>
-                    <th>Title</th>
+                    <th>Name</th>
                     <th>Description</th>
                     <th>Rating</th>
+                    <th>Diet</th>
                     <th>Delete</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="recipe : ${Recipes}">
+                <tr th:each="recipe : ${recipes}">
                     <td th:text="${recipe.name}"></td>
                     <td th:text="${recipe.description}"></td>
                     <td th:text="${recipe.rating}"></td>
-                    <td th:text="${recipe.diets}"></td>
-                    <td th:text="${recipe.diets[0] }"></td>
+                    <td th:text="${recipe.diet}"></td>
                     <td><a th:href="@{/delete/{id}(id=${recipe.id})}">Delete</a></td>
                 </tr>
                 </tbody>
             </table>
         </div>
         <p><a href="/addrecipe">Add a new recipe</a></p>
+        <p><a href="/recipeSearch">Search</a> for a recipe by name</p>
+        <p><a href="/makedata">Generate data</a></p>
     </div>
 </body>
 </html>
