@@ -10,12 +10,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class RecipeServiceImplementation implements RecipeService {
+public class RecipeServiceImp implements RecipeService {
 
     RecipeRepo repo;
 
     @Autowired
-    public RecipeServiceImplementation(RecipeRepo recipeRepo){
+    public RecipeServiceImp(RecipeRepo recipeRepo){
         this.repo = recipeRepo;
     }
 

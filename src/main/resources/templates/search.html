@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Fridge Buddy</title>
+</head>
+    <body>
+        <h2>Search for Recipes</h2>
+        <form action="#" th:action="@{/recipeSearch}" th:object="${recipe}"  method="post">
+            <input type="text" name="search" id="search" th:value="${search}"/>
+            <input type="submit" value="Search"/>
+        </form>
+    </body>
+</html>

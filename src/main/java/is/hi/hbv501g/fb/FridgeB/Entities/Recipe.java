@@ -16,13 +16,19 @@ public class Recipe {
     private String description;
     private Double rating;
 
-    public Recipe(){
-    }
+    /*
+    @ElementCollection(targetClass = Diet.class)
+    @Column(name = "diet", nullable=false)
+    @CollectionTable(name="recipe_diet", joinColumns = {@JoinColumn(name = "recipe_id")})
+    public Set<Diet> diet;
+*/
+    public Recipe(){}
 
-    public Recipe(String name, String description, Double rating) {
+    public Recipe(String name, String description, Double rating/*, HashSet<Diet> diet*/) {
         this.name = name;
         this.description = description;
         this.rating = rating;
+        //this.diet = diet;
     }
 
     public long getId() {
@@ -55,5 +61,10 @@ public class Recipe {
 
     public void setRating(Double rating) {
         this.rating = rating;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
     }
 }
