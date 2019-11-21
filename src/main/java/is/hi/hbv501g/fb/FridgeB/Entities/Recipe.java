@@ -20,6 +20,8 @@ public class Recipe {
     @CollectionTable(name="recipe_diet", joinColumns = {@JoinColumn(name = "recipe_id")})
     public Set<Diet> diet;
 
+    public Recipe(){}
+
     public Recipe(String name, String description, Double rating, HashSet<Diet> diet) {
         this.name = name;
         this.description = description;

@@ -70,7 +70,7 @@ public class HomeController {
         return "Velkominn";
     }
 
-    @RequestMapping("/makedata")
+    @RequestMapping(value="/makedata", method = RequestMethod.GET)
     public String makeData(Model model){
         System.out.println("make recipes");
         HashSet<Diet> diets = new HashSet<>();

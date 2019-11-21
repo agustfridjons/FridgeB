@@ -15,11 +15,10 @@
     <label for="rating">Rating</label>
     <input type="number" th:field="*{rating}" id="rating" placeholder="Rating">
     <span th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"></span>
-    <label for="diet">Diet</label>
+    <!--<label for="diet">Diet</label>
     <input type="text" th:field="*{diet}" id="diet" placeholder="Diet">
-    <span th:if="${#fields.hasErrors('diet')}" th:errors="*{diet}"></span>
+    <span th:if="${#fields.hasErrors('diet')}" th:errors="*{diet}"></span>-->
     <input type="submit" value="Add recipe">
 </form>
-
 </body>
 </html>

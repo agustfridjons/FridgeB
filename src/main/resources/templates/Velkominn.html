@@ -18,7 +18,7 @@
                     <th>Name</th>
                     <th>Description</th>
                     <th>Rating</th>
-                    <th>Diet</th>
+                    <!--<th>Diet</th>-->
                     <th>Delete</th>
                 </tr>
                 </thead>
@@ -27,7 +27,7 @@
                     <td th:text="${recipe.name}"></td>
                     <td th:text="${recipe.description}"></td>
                     <td th:text="${recipe.rating}"></td>
-                    <td th:text="${recipe.diet}"></td>
+                    <!--<td th:text="${recipe.diet}"></td>-->
                     <td><a th:href="@{/delete/{id}(id=${recipe.id})}">Delete</a></td>
                 </tr>
                 </tbody>
