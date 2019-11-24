@@ -9,14 +9,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    public String uName;
-    public String password;
+    private String UName;
+    private String password;
 
     public User() {
     }
 
-    public User(String uName, String password) {
-        this.uName = uName;
+    public User(String UName, String password) {
+        this.UName = UName;
         this.password = password;
     }
 
@@ -30,15 +30,15 @@ public class User {
 
     @Override
     public String toString() {
-        return uName;
+        return UName;
     }
 
-    public String getuName() {
-        return uName;
+    public String getUName() {
+        return UName;
     }
 
-    public void setuName(String uName) {
-        this.uName = uName;
+    public void setUName(String UName) {
+        this.UName = UName;
     }
 
     public String getPassword() {

@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Sign Up</title>
+    <link rel="stylesheet" href="../Static/css/styleHome.css" th:href="@{/css/styleHome.css}">
 </head>
 <body>
 <h2>Create your account</h2>
 <form action="#" th:action="@{/signup}" th:object="${user}"  method="post">
-    <input type="text" name="username" id="username" th:field="*{uName}"/>
-    <input type="text" name="password" id="password" th:value="*{password}"/>
+    <input type="text" name="username" id="username" th:field="*{UName}"/>
+    <input type="password" name="password" id="password" th:value="*{password}"/>
     <input type="submit" value="Sign up"/>
 </form>
 </body>

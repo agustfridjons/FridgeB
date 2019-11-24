@@ -1,6 +1,7 @@
 package is.hi.hbv501g.fb.FridgeB;
 
 import is.hi.hbv501g.fb.FridgeB.Entities.Recipe;
+import is.hi.hbv501g.fb.FridgeB.Entities.User;
 import is.hi.hbv501g.fb.FridgeB.Services.RecipeService;
 import is.hi.hbv501g.fb.FridgeB.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,21 +17,20 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-public class HomeController {
+public class RecipeController {
 
     private RecipeService recipeService;
     private UserService userService;
 
     @Autowired
-    public HomeController(RecipeService recipeService, UserService userService){
-        this.recipeService = recipeService;
+    public RecipeController(UserService userService, RecipeService recipeService){
         this.userService = userService;
+        this.recipeService = recipeService;
     }
-
     @RequestMapping("/")
     public String Home(Model model){
         model.addAttribute("Recipes", recipeService.findAll());
-        return "Velkominn";
+        return "home";
     }
 
     @RequestMapping(value = "/addrecipe",method = RequestMethod.POST)
@@ -40,7 +40,7 @@ public class HomeController {
         }
         recipeService.save(recipe);
         model.addAttribute("Recipes", recipeService.findAll());
-        return "Velkominn";
+        return "home";
     }
 
     @RequestMapping(value = "/addrecipe", method = RequestMethod.GET)
@@ -53,7 +53,7 @@ public class HomeController {
         Recipe recipe = recipeService.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid Recipe Id"));
         recipeService.delete(recipe);
         model.addAttribute("Recipes", recipeService.findAll());
-        return "Velkominn";
+        return "home";
     }
 
     @RequestMapping("/recipeSearch")
@@ -66,7 +66,7 @@ public class HomeController {
         List<Recipe> recipe = recipeService.findByName(search);
         System.out.println(recipe.get(0));
         model.addAttribute("Recipes", recipe);
-        return "Velkominn";
+        return "home";
     }
 
     @RequestMapping("/makedata")
@@ -78,9 +78,10 @@ public class HomeController {
         for (int i = 1; i <= 3; i++) {
             this.recipeService.save(new Recipe("Good food "+i," recipe with ",Double.valueOf(i)/*,diets*/));
         }
-        //User tempUser = new User("Karl Jóhann","pass123");
+        User tempUser = new User("Karl Jóhann","pass123");
+        this.userService.save(tempUser);
         model.addAttribute("Recipes", recipeService.findAll());
-        return "Velkominn";
+        return "home";
     }
 
 }

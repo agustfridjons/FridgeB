@@ -3,22 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Fridge Buddy</title>
+    <link rel="stylesheet" href="../Static/css/styleHome.css" th:href="@{/css/styleHome.css}">
 </head>
 <body>
-<form action="#" th:action="@{/addrecipe}" th:object="${recipe}" method="post">
-    <label for="name">name</label>
-    <input type="text" th:field="*{name}" id="name" placeholder="name">
-    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
-    <label for="description">Description</label>
-    <input type="text" th:field="*{description}" id="description" placeholder="Description">
-    <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
-    <label for="rating">Rating</label>
-    <input type="number" th:field="*{rating}" id="rating" placeholder="Rating">
-    <span th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"></span>
-    <!--<label for="diet">Diet</label>
-    <input type="text" th:field="*{diet}" id="diet" placeholder="Diet">
-    <span th:if="${#fields.hasErrors('diet')}" th:errors="*{diet}"></span>-->
-    <input type="submit" value="Add recipe">
-</form>
+<div class="pagewrap">
+    <form class="form" action="#" th:action="@{/addrecipe}" th:object="${recipe}" method="post">
+        <h3 class="form_title">Add your own recipe</h3>
+        <div class="container">
+            <label class="container_label" for="name">name</label>
+            <input class="container_input"type="text" th:field="*{name}" id="name" placeholder="name">
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+        </div>
+        <div class="container">
+            <label class="container_label" for="description">Description</label>
+            <input class="container_input"type="text" th:field="*{description}" id="description" placeholder="Description">
+            <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+        </div>
+        <div class="container">
+            <label class="container_label" for="rating">Rating</label>
+            <input class="container_input"type="number" th:field="*{rating}" id="rating" placeholder="Rating">
+            <span th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"></span>
+        </div>
+            <!--<label class="container_label" for="diet">Diet</label>
+            <input class="container_input"type="text" th:field="*{diet}" id="diet" placeholder="Diet">
+            <span th:if="${#fields.hasErrors('diet')}" th:errors="*{diet}"></span>-->
+        <input class="form_submit"type="submit" value="Add recipe">
+    </form>
+</div>
 </body>
 </html>
