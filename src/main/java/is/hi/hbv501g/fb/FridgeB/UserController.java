@@ -50,7 +50,7 @@ public class UserController {
             System.out.println(user);
             userService.save(user);
         }else{
-            return "singUp";
+            return "signUp";
         }
         model.addAttribute("Recipes", recipeService.findAll());
         return "home";

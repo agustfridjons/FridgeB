@@ -3,14 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Sign Up</title>
-    <link rel="stylesheet" href="../Static/css/styleHome.css" th:href="@{/css/styleHome.css}">
+    <link rel="stylesheet" href="../Static/css/styleForm.css" th:href="@{/css/styleForm.css}">
 </head>
 <body>
-<h2>Create your account</h2>
+<!--<h2>Create your account</h2>
 <form action="#" th:action="@{/signup}" th:object="${user}"  method="post">
     <input type="text" name="username" id="username" th:field="*{UName}"/>
     <input type="password" name="password" id="password" th:value="*{password}"/>
     <input type="submit" value="Sign up"/>
-</form>
+
+</form>-->
+<div class="pagewrap">
+    <form class="form" action="#" th:action="@{/signup}" th:object="${user}"  method="post">
+        <h3 class="form_title">Create your Fridge Buddy account</h3>
+        <div class="container">
+            <label class="container_label" for="username">Username</label>
+            <input class="container_input" type="text" name="username" id="username" th:field="*{UName}"/>
+        </div>
+        <div class="container">
+            <label class="container_label" for="password">Password</label>
+            <input class="container_input" type="password" name="password" id="password" th:value="*{password}"/>
+        </div>
+        <input class="form_submit" type="submit" value="Sign up"/>
+    </form>
+</div>
 </body>
 </html>

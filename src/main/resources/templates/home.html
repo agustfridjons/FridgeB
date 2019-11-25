@@ -6,9 +6,20 @@
     <link rel="stylesheet" href="../Static/css/styleHome.css" th:href="@{/css/styleHome.css}">
 </head>
 <body>
-    <h1>Fridge Buddy</h1>
-    <h3>What should we have for dinner?</h3>
-    <div th:switch="${Recipes}">
+    <div class="header">
+        <div class="headings">
+            <h1>Fridge Buddy</h1>
+            <h3>What should we have for dinner?</h3>
+        </div>
+        <div class="link">
+            <a class="link_button" href="/addrecipe">Add a recipe</a>
+            <a class="link_button" href="/recipeSearch">Search for a recipe</a>
+            <a class="link_button" href="/makedata">Generate data</a>
+            <a class="link_button" href="/login">Login</a>
+            <a class="link_button" href="/signup">Sign up</a>
+        </div>
+    </div>
+    <div class="pagewrap" th:switch="${Recipes}">
         <h2 th:case="null">No recipes yet!</h2>
         <div th:case="*">
             <h2>Recipes</h2>
@@ -23,7 +34,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="recipe : ${Recipes}">
+                <tr class="table_row" th:each="recipe : ${Recipes}">
                     <td th:text="${recipe.name}"></td>
                     <td th:text="${recipe.description}"></td>
                     <td th:text="${recipe.rating}"></td>
@@ -33,11 +44,7 @@
                 </tbody>
             </table>
         </div>
-        <p><a href="/addrecipe">Add a new recipe</a></p>
-        <p><a href="/recipeSearch">Search</a> for a recipe by name</p>
-        <p><a href="/makedata">Generate data</a></p>
-        <p><a href="/login">Log in to your account</a></p>
-        <p><a href="/signup">Add a new user</a></p>
+
     </div>
 </body>
 </html>
