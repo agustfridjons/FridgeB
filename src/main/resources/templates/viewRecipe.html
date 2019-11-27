@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Fridge Buddy</title>
+    <link rel="stylesheet" href="../Static/css/styleRecipe.css" th:href="@{/css/styleRecipe.css}">
+</head>
+<body>
+<div th:switch="${selectedRecipe}">
+    <h2 th:case="null">No recipe selected!</h2>
+    <div th:case="*" th:each="recipe: ${selectedRecipe}">
+        <div class="header">
+            <div class="header_heading">
+                <h1 th:text="${recipe.name}"></h1>
+                <div class="header_extra">
+                    <div>Author<!--th:text="${auth}"--></div>
+                    <div>Rating:</div>
+                    <div class="rating" th:text="${recipe.rating}"></div>
+                </div>
+            </div>
+            <div class="link">
+                <a class="link_button" href="/">Home</a>
+                <a class="link_button" href="/recipeSearch">Search for a recipe</a>
+                <a class="link_button" href="/login">Login</a>
+            </div>
+        </div>
+        <div class="pagewrap">
+            <div class="container">
+                <div class="text_box">
+                    <h3>Ingedients</h3>
+                    <div th:text="${recipe.description}"></div>
+                </div>
+                <div>
+                    <img class="image" th:src="${recipe.img}"/>
+                </div>
+            </div>
+            <div class="container">
+                <div class="text_box">
+                    <h3>Description</h3>
+                    <div th:text="${recipe.description}"></div>
+                    <form class="container" th:action="@{/rate/{id}(id=${recipe.id})}" th:object="${recipe}" method="post">
+                        <label class="container_label" for="rate">Rate</label>
+                        <input class="container_input" type="range" min="0" max="5" step="1" name="rate" id="rate" th:value="${rate}"/>
+                        <input class="form_submit" type="submit" value="Rate recipe"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

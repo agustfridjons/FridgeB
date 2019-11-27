@@ -12,9 +12,31 @@ body {
     font-family: sans-serif;
 }
 
+.header{
+    background-color: #ecedee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px 20px 20px;
+    border-bottom: 1px solid;
+    border-bottom-color: #64646482;
+}
+
+.link_button{
+    background-color: skyblue;
+    margin: 2.5px;
+    letter-spacing: 1px;
+    padding: 10px;
+    font-size: 0.90rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: white;
+    box-shadow: -2px 2px #67a1ca8f;
+}
+
 .form {
     width: 80%;
-    height: 50%;
+    height: 60%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -25,12 +47,16 @@ body {
 
 
 .form_title {
-     margin-bottom: 1em;
+     margin-bottom: 0.5em;
      position: relative;
      z-index: 2;
      background: transparent;
      text-transform: uppercase;
  }
+
+.form_error{
+    margin-bottom: 0.5em;
+}
 
 .form_submit {
     margin-top: 1.2em;
@@ -41,7 +67,7 @@ body {
     letter-spacing: 1.2px;
     font-size: .98rem;
     text-transform: uppercase;
-    /*box-shadow: -3px 5px darken(skyblue, 10%);*/
+    box-shadow: -2px 2px #67a1ca8f;
     cursor: pointer;
     transition: all 0s ease;
 }

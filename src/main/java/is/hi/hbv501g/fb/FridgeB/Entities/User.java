@@ -11,14 +11,24 @@ public class User {
 
     private String UName;
     private String password;
+    private boolean admin;
 
     public User() {
+    }
+
+    public User(String UName, String password, Boolean admin) {
+        this.UName = UName;
+        this.password = password;
+        this.admin = admin;
     }
 
     public User(String UName, String password) {
         this.UName = UName;
         this.password = password;
+        this.admin = false;
     }
+
+
 
     public long getId() {
         return id;

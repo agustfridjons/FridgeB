@@ -14,7 +14,10 @@ public class Recipe {
 
     private String name;
     private String description;
-    private Double rating;
+    private String ratings;
+    private String img;
+    private String ingredients;
+    private double rating;
 
     /*
     @ElementCollection(targetClass = Diet.class)
@@ -24,12 +27,19 @@ public class Recipe {
 */
     public Recipe(){}
 
-    public Recipe(String name, String description, Double rating/*, HashSet<Diet> diet*/) {
+    public Recipe(String name, String description, String ratings, String img, String ingredients, double rating/*, HashSet<Diet> diet*/) {
         this.name = name;
         this.description = description;
-        this.rating = rating;
+        this.ratings = ratings;
+        this.img = img;
+        this.ingredients = ingredients;
+        this.rating =  rating;
         //this.diet = diet;
     }
+
+    public String getImg() { return img; }
+
+    public void setImg(String img) { this.img = img; }
 
     public long getId() {
         return id;
@@ -55,11 +65,27 @@ public class Recipe {
         this.description = description;
     }
 
-    public Double getRating() {
+    public String getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(String ratings) {
+        this.ratings = ratings;
+    }
+
+    public String getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(String ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(Double rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 

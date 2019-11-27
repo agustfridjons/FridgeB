@@ -12,16 +12,16 @@
             <h3>What should we have for dinner?</h3>
         </div>
         <div class="link">
-            <a class="link_button" href="/addrecipe">Add a recipe</a>
             <a class="link_button" href="/recipeSearch">Search for a recipe</a>
             <a class="link_button" href="/makedata">Generate data</a>
+            <a class="link_button" href="/addrecipe">Add a recipe</a>
             <a class="link_button" href="/login">Login</a>
             <a class="link_button" href="/signup">Sign up</a>
         </div>
     </div>
     <div class="pagewrap" th:switch="${Recipes}">
         <h2 th:case="null">No recipes yet!</h2>
-        <div th:case="*">
+        <div class="container" th:case="*">
             <h2>Recipes</h2>
             <table>
                 <thead>
@@ -30,21 +30,22 @@
                     <th>Description</th>
                     <th>Rating</th>
                     <!--<th>Diet</th>-->
-                    <th>Delete</th>
+                    <th></th>
+                    <th th:swich="${user}" th:case="${user.admin}=true"></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr class="table_row" th:each="recipe : ${Recipes}">
                     <td th:text="${recipe.name}"></td>
-                    <td th:text="${recipe.description}"></td>
+                    <td class="description" th:text="${recipe.description}"></td>
                     <td th:text="${recipe.rating}"></td>
                     <!--<td th:text="${recipe.diet}"></td>-->
-                    <td><a th:href="@{/delete/{id}(id=${recipe.id})}">Delete</a></td>
+                    <td><a th:href="@{/view/{id}(id=${recipe.id})}">View recipe</a></td>
+                    <td th:swich="${user}" th:case="${user.admin}=true"><a th:href="@{/delete/{id}(id=${recipe.id})}">Delete</a></td>
                 </tr>
                 </tbody>
             </table>
         </div>
-
     </div>
 </body>
 </html>

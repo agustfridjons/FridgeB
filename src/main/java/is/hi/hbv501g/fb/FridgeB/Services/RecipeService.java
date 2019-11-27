@@ -10,5 +10,7 @@ public interface RecipeService {
     void delete(Recipe recipe);
     List<Recipe> findAll();
     List<Recipe> findByName(String name);
+    List<Recipe> searchByKey(String key);
     Optional<Recipe> findById(long id);
+    double calculateRating(Recipe recipe);
 }

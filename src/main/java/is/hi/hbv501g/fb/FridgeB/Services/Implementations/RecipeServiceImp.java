@@ -35,12 +35,23 @@ public class RecipeServiceImp implements RecipeService {
     }
 
     @Override
-    public List<Recipe> findByName(String name) {
-        return repo.findByName(name);
+    public List<Recipe> findByName(String name){ return repo.findByName(name);}
+
+    @Override
+    public List<Recipe> searchByKey(String key) {
+        return repo.searchByKey(key);
     }
 
     @Override
     public Optional<Recipe> findById(long id) {
         return repo.findById(id);
+    }
+
+    @Override
+    public double calculateRating(Recipe recipe){
+        String s = recipe.getRatings();
+
+        double rating = 0;
+        return rating;
     }
 }

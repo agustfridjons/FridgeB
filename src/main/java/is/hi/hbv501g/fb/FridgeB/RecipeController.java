@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -28,7 +29,12 @@ public class RecipeController {
         this.recipeService = recipeService;
     }
     @RequestMapping("/")
-    public String Home(Model model){
+    public String Home(Model model, HttpSession session){
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        if(sessionUser != null){
+            System.out.println(sessionUser);
+            model.addAttribute("user",sessionUser);
+        }
         model.addAttribute("Recipes", recipeService.findAll());
         return "home";
     }
@@ -36,11 +42,12 @@ public class RecipeController {
     @RequestMapping(value = "/addrecipe",method = RequestMethod.POST)
     public String addRecipe(@Valid Recipe recipe, BindingResult results, Model model){
         if(results.hasErrors()){
+            model.addAttribute("error", "Not a valid recipe");
             return "add-recipe";
         }
         recipeService.save(recipe);
         model.addAttribute("Recipes", recipeService.findAll());
-        return "home";
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/addrecipe", method = RequestMethod.GET)
@@ -48,12 +55,19 @@ public class RecipeController {
         return "add-recipe";
     }
 
+    @RequestMapping(value="/view/{id}", method = RequestMethod.GET)
+    public String viewRecipe(@PathVariable("id") long id, Model model){
+        Recipe recipe = recipeService.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid Recipe Id"));
+        model.addAttribute("selectedRecipe", recipe);
+        return "viewRecipe";
+    }
+
     @RequestMapping(value="/delete/{id}", method = RequestMethod.GET)
     public String deleteRecipe(@PathVariable("id") long id, Model model){
         Recipe recipe = recipeService.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid Recipe Id"));
         recipeService.delete(recipe);
         model.addAttribute("Recipes", recipeService.findAll());
-        return "home";
+        return "redirect:/";
     }
 
     @RequestMapping("/recipeSearch")
@@ -63,25 +77,42 @@ public class RecipeController {
 
     @RequestMapping(value= "/recipeSearch", method = RequestMethod.POST)
     public String searchRecipe(@RequestParam(value = "search", required = false) String search, Model model){
-        List<Recipe> recipe = recipeService.findByName(search);
+        List<Recipe> recipe = recipeService.searchByKey(search);
         System.out.println(recipe.get(0));
         model.addAttribute("Recipes", recipe);
-        return "home";
+        return "redirect:/";
+    }
+
+    @RequestMapping(value= "/rate/{id}", method = RequestMethod.POST)
+    public String rateRecipe(@RequestParam(value = "rate", required = false) int rate, @PathVariable("id") long id, Model model){
+        Recipe recipe = recipeService.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid Recipe Id"));
+        double r = (double) rate;
+        recipe.setRating(r);
+        model.addAttribute("selectedRecipe", recipe);
+        System.out.println("rated");
+        return "viewRecipe";
+    }
+
+    @RequestMapping("/view")
+    public String view(){
+        return "viewRecipe";
     }
 
     @RequestMapping("/makedata")
     public String makeData(Model model){
-        System.out.println("make recipes");
+        String[] img = {"https://images2.minutemediacdn.com/image/upload/c_crop,h_1126,w_2000,x_0,y_181/f_auto,q_auto,w_1100/v1554932288/shape/mentalfloss/12531-istock-637790866.jpg",
+                        "https://cdn.popmenu.com/image/upload/c_limit,f_auto,h_1440,q_auto,w_1440/j7gunhkdbqkgwhpfl808.jpg",
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQes9Iim0-rPaLoelNDzqjuleF18o4OKQzZewSPhZTk_JpDxdz1&s"};
         /*HashSet<Diet> diets = new HashSet<>();
         diets.add(Diet.CLASSIC);
         diets.add(Diet.VEGITERIAN);*/
         for (int i = 1; i <= 3; i++) {
-            this.recipeService.save(new Recipe("Good food "+i," recipe with ",Double.valueOf(i)/*,diets*/));
+            this.recipeService.save(new Recipe("Good food "+i," recipe with ",""+i,img[i-1],",Chicken 1kg,Bacon 200g,Lettuce,",3.0 /*,diets*/));
         }
-        User tempUser = new User("Karl Jóhann","pass123");
+        User tempUser = new User("Karl","pass",true);
         this.userService.save(tempUser);
         model.addAttribute("Recipes", recipeService.findAll());
-        return "home";
+        return "redirect:/";
     }
 
 }

@@ -43,17 +43,23 @@ public class UserController {
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String signUpPOST(@Valid User user, BindingResult result, Model model){
         if(result.hasErrors()){
+            model.addAttribute("error","Error");
+            return "signUp";
+        }
+        String reg = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$";
+        if(!user.getPassword().matches(reg)){
+            model.addAttribute("error","Password must include minimum of eight characters, at least one letter and one number");
             return "signUp";
         }
         User exists = userService.findByUName(user.getUName());
         if(exists == null){
-            System.out.println(user);
             userService.save(user);
         }else{
+            model.addAttribute("error","Username already exists");
             return "signUp";
         }
         model.addAttribute("Recipes", recipeService.findAll());
-        return "home";
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -70,6 +76,7 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String loginPOST(@Valid User user, BindingResult result, Model model, HttpSession session){
         if(result.hasErrors()){
+            model.addAttribute("error","Error");
             return "login";
         }
         model.addAttribute("Recipes",recipeService.findAll());
@@ -78,7 +85,8 @@ public class UserController {
             session.setAttribute("LoggedInUser", user);
             return "redirect:/";
         }
-        return "redirect:/";
+        model.addAttribute("error","Wrong username or password");
+        return "logIn";
     }
 
 }
