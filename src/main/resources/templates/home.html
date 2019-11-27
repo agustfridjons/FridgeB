@@ -27,9 +27,8 @@
                 <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Description</th>
+                    <th>Ingredients</th>
                     <th>Rating</th>
-                    <!--<th>Diet</th>-->
                     <th></th>
                     <th th:swich="${user}" th:case="${user.admin}=true"></th>
                 </tr>
@@ -37,9 +36,8 @@
                 <tbody>
                 <tr class="table_row" th:each="recipe : ${Recipes}">
                     <td th:text="${recipe.name}"></td>
-                    <td class="description" th:text="${recipe.description}"></td>
+                    <td class="ingredients" th:text="${recipe.ingredients}"></td>
                     <td th:text="${recipe.rating}"></td>
-                    <!--<td th:text="${recipe.diet}"></td>-->
                     <td><a th:href="@{/view/{id}(id=${recipe.id})}">View recipe</a></td>
                     <td th:swich="${user}" th:case="${user.admin}=true"><a th:href="@{/delete/{id}(id=${recipe.id})}">Delete</a></td>
                 </tr>

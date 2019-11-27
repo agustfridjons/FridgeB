@@ -85,3 +85,6 @@ tbody td:hover:before {
     z-index: -1;
 }
 
+.ingredients{
+    overflow: hidden;
+}

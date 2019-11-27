@@ -22,6 +22,7 @@ public class RecipeController {
 
     private RecipeService recipeService;
     private UserService userService;
+    private List<String> ingredients;
 
     @Autowired
     public RecipeController(UserService userService, RecipeService recipeService){
@@ -58,7 +59,9 @@ public class RecipeController {
     @RequestMapping(value="/view/{id}", method = RequestMethod.GET)
     public String viewRecipe(@PathVariable("id") long id, Model model){
         Recipe recipe = recipeService.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid Recipe Id"));
+        this.ingredients = recipeService.findIngredients(recipe.getIngredients());
         model.addAttribute("selectedRecipe", recipe);
+        model.addAttribute("ingredient",this.ingredients);
         return "viewRecipe";
     }
 
@@ -86,10 +89,12 @@ public class RecipeController {
     @RequestMapping(value= "/rate/{id}", method = RequestMethod.POST)
     public String rateRecipe(@RequestParam(value = "rate", required = false) int rate, @PathVariable("id") long id, Model model){
         Recipe recipe = recipeService.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid Recipe Id"));
-        double r = (double) rate;
-        recipe.setRating(r);
+        String ratings = recipe.getRatings() + rate;
+        recipe.setRatings(ratings);
+        recipe.setRating(recipeService.calculateRating(ratings));
+        recipeService.save(recipe);
         model.addAttribute("selectedRecipe", recipe);
-        System.out.println("rated");
+        model.addAttribute("ingredient",this.ingredients);
         return "viewRecipe";
     }
 
@@ -103,11 +108,12 @@ public class RecipeController {
         String[] img = {"https://images2.minutemediacdn.com/image/upload/c_crop,h_1126,w_2000,x_0,y_181/f_auto,q_auto,w_1100/v1554932288/shape/mentalfloss/12531-istock-637790866.jpg",
                         "https://cdn.popmenu.com/image/upload/c_limit,f_auto,h_1440,q_auto,w_1440/j7gunhkdbqkgwhpfl808.jpg",
                         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQes9Iim0-rPaLoelNDzqjuleF18o4OKQzZewSPhZTk_JpDxdz1&s"};
+        String[] food = {"Eggs 2pcs,","Beef 500g,","Milk 0.5L,"};
         /*HashSet<Diet> diets = new HashSet<>();
         diets.add(Diet.CLASSIC);
         diets.add(Diet.VEGITERIAN);*/
         for (int i = 1; i <= 3; i++) {
-            this.recipeService.save(new Recipe("Good food "+i," recipe with ",""+i,img[i-1],",Chicken 1kg,Bacon 200g,Lettuce,",3.0 /*,diets*/));
+            this.recipeService.save(new Recipe("Good food "+i," recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with ","23544"+i,img[i-1],",Chicken 1kg,Bacon 200g,Lettuce 100g,"+food[i-1],Double.valueOf(i) /*,diets*/));
         }
         User tempUser = new User("Karl","pass",true);
         this.userService.save(tempUser);

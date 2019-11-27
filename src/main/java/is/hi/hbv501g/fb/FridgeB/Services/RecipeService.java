@@ -12,5 +12,6 @@ public interface RecipeService {
     List<Recipe> findByName(String name);
     List<Recipe> searchByKey(String key);
     Optional<Recipe> findById(long id);
-    double calculateRating(Recipe recipe);
+    double calculateRating(String ratings);
+    List<String> findIngredients(String ratings);
 }

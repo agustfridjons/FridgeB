@@ -28,7 +28,9 @@
             <div class="container">
                 <div class="text_box">
                     <h3>Ingedients</h3>
-                    <div th:text="${recipe.description}"></div>
+                    <div th:each="ing : ${ingredient}">
+                        <div class="ingred" th:text="${ing}"></div>
+                    </div>
                 </div>
                 <div>
                     <img class="image" th:src="${recipe.img}"/>
