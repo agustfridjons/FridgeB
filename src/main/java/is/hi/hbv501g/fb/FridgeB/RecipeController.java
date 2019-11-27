@@ -81,7 +81,7 @@ public class RecipeController {
     @RequestMapping(value= "/recipeSearch", method = RequestMethod.POST)
     public String searchRecipe(@RequestParam(value = "search", required = false) String search, Model model){
         List<Recipe> recipe = recipeService.searchByKey(search);
-        System.out.println(recipe.get(0));
+        //System.out.println(recipe.get(0));
         model.addAttribute("Recipes", recipe);
         return "redirect:/";
     }
