@@ -40,10 +40,10 @@
                 <div class="text_box">
                     <h3>Description</h3>
                     <div th:text="${recipe.description}"></div>
-                    <form class="container" th:action="@{/rate/{id}(id=${recipe.id})}" th:object="${recipe}" method="post">
-                        <label class="container_label" for="rate">Rate</label>
-                        <input class="container_input" type="range" min="0" max="5" step="1" name="rate" id="rate" th:value="${rate}"/>
-                        <input class="form_submit" type="submit" value="Rate recipe"/>
+                    <form class="rate_form" th:action="@{/rate/{id}(id=${recipe.id})}" th:object="${recipe}" method="post">
+                        <label class="form_label" for="rate">Rate</label>
+                        <input class="form_input" type="range" min="0" max="5" step="1" name="rate" id="rate" th:value="${rate}"/>
+                        <input class="link_button" type="submit" value="Rate recipe"/>
                     </form>
                 </div>
             </div>

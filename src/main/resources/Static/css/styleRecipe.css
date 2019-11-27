@@ -46,6 +46,7 @@ body{
 
 .container:last-child{
     margin-bottom: 50px;
+
 }
 
 .container{
@@ -65,6 +66,12 @@ body{
     border-radius: 2px;
 }
 
+.text_box:last-child{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .image{
     width: 500px;
     height: 300px;
@@ -74,8 +81,15 @@ body{
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
+.rate_form{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
 
 
 .ingred{
     margin: 5px;
 }
+
+
