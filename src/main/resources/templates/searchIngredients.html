@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Fridge Buddy</title>
+    <link rel="stylesheet" href="../Static/css/styleForm.css" th:href="@{/css/styleForm.css}">
+</head>
+<body>
+<div class="header">
+    <div class="headings">
+        <h1>Fridge Buddy</h1>
+        <h3>What should we have for dinner?</h3>
+    </div>
+    <div class="link">
+        <a class="link_button" href="/">Home</a>
+        <a class="link_button" href="/login">Login</a>
+    </div>
+</div>
+<div class="pagewrap">
+    <form class="form" action="#" th:action="@{/searchIngredients}" th:object="${recipe}"  method="post">
+        <h3 class="form_title">Search by Ingredients</h3>
+        <div class="form_error" th:switch="${error}" th:text="${error}"></div>
+        <div class="container">
+            <label class="container_label" for="search">Search by ingredients</label>
+            <input class="container_input" type="text" name="search" id="search" th:value="${search}"/>
+        </div>
+        <input class="form_submit" type="submit" value="Search"/>
+    </form>
+</div>
+</body>
+</html>

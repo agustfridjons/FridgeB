@@ -78,12 +78,23 @@ public class RecipeController {
         return "search";
     }
 
+    @RequestMapping("/searchIngredients")
+    public String searchI(){
+        return "searchIngredients";
+    }
+
+    @RequestMapping(value ="/searchIngredients", method = RequestMethod.POST)
+    public String searchIngredients(@RequestParam(value = "search", required = false) String search, Model model){
+        List<Recipe> recipes = recipeService.findIngredients(search);
+        return  "search";
+    }
+
     @RequestMapping(value= "/recipeSearch", method = RequestMethod.POST)
     public String searchRecipe(@RequestParam(value = "search", required = false) String search, Model model){
         List<Recipe> recipe = recipeService.searchByKey(search);
         //System.out.println(recipe.get(0));
         model.addAttribute("Recipes", recipe);
-        return "redirect:/";
+        return "home";
     }
 
     @RequestMapping(value= "/rate/{id}", method = RequestMethod.POST)
