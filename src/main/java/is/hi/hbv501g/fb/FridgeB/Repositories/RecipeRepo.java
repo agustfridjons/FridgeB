@@ -16,6 +16,6 @@ public interface RecipeRepo extends JpaRepository<Recipe, Long> {
     Optional<Recipe> findById(long id);
     List<Recipe> findByName(String name);
 
-    @Query(value = "SELECT * FROM recipe WHERE name LIKE '%:key%'", nativeQuery = true)
+    @Query(value = "SELECT * FROM recipe WHERE name LIKE %:key%", nativeQuery = true)
     List<Recipe> searchByKey(@Param("key") String key);
  }
