@@ -1,6 +1,6 @@
 *{box-sizing: border-box;margin: 0;padding: 0; outline: none; transition: all 0.3s ease; animation-delay: 0s;}
 
-.pagewrap {max-width: 100%; height: 100vh; margin: 0 auto; display: flex; justify-content: center; align-items: center;}
+.pagewrap {max-width: 100%; min-height: 100vh; margin: 0 auto; display: flex; justify-content: center; align-items: center;}
 
 body {
     background: #74ebd5;
@@ -36,13 +36,14 @@ body {
 
 .form {
     width: 80%;
-    height: 60%;
+    min-height: 60%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-flow: column wrap;
     background-color: #ecedee;
     border-radius: 10px;
+    padding: 20px;
 }
 
 

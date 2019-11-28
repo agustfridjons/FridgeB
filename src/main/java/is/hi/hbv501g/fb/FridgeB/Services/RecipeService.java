@@ -14,4 +14,5 @@ public interface RecipeService {
     Optional<Recipe> findById(long id);
     double calculateRating(String ratings);
     List<String> findIngredients(String ratings);
+    void addValues(Recipe recipe);
 }

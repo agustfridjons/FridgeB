@@ -22,6 +22,13 @@ body{
     border-bottom-color: #64646482;
 }
 
+.header_extra{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 5px;
+}
+
 .link_button{
     background-color: skyblue;
     margin: 2.5px;
@@ -60,6 +67,11 @@ td {
     padding: 15px;
     background-color: rgba(255, 255, 255, 0.3);
     color: #646464;
+    min-width: 120px;
+    max-width: 300px;
+}
+tr{
+    white-space: nowrap;
 }
 th {
     text-align: left;

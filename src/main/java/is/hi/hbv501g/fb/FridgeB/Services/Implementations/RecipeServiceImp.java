@@ -44,8 +44,12 @@ public class RecipeServiceImp implements RecipeService {
     }
 
     @Override
-    public Optional<Recipe> findById(long id) {
-        return repo.findById(id);
+    public Optional<Recipe> findById(long id) { return repo.findById(id); }
+
+    @Override
+    public void addValues(Recipe recipe){
+        recipe.setRating(0.0);
+        recipe.setRatings("");
     }
 
     @Override
@@ -71,6 +75,9 @@ public class RecipeServiceImp implements RecipeService {
 
     @Override
     public double calculateRating(String ratings){
+        if(ratings.equals("")||ratings == null){
+            return 0.0;
+        }
         double s = 0;
         double c = 0;
         for (int i = 0; i < ratings.length(); i++) {

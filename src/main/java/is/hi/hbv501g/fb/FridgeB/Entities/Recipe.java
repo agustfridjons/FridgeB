@@ -27,6 +27,15 @@ public class Recipe {
 */
     public Recipe(){}
 
+    public Recipe(String name, String description, String ingredients, String img){
+        this.name = name;
+        this.description = description;
+        this.ratings = "";
+        this.img = img;
+        this.ingredients = ingredients;
+        this.rating = 0.0;
+    }
+
     public Recipe(String name, String description, String ratings, String img, String ingredients, double rating/*, HashSet<Diet> diet*/) {
         this.name = name;
         this.description = description;

@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Fridge Buddy</title>
     <link rel="stylesheet" href="../Static/css/styleRecipe.css" th:href="@{/css/styleRecipe.css}">
-    <link rel="script" href="../Static/css/rating.js" th:href="@{/css/rating.js}">
 </head>
 <body>
 <div th:switch="${selectedRecipe}">
@@ -14,7 +13,6 @@
             <div class="header_heading">
                 <h1 th:text="${recipe.name}"></h1>
                 <div class="header_extra">
-                    <div>Author<!--th:text="${auth}"--></div>
                     <div>Rating:</div>
                     <div class="rating" th:text="${recipe.rating}"></div>
                 </div>
@@ -43,7 +41,7 @@
                     <div class="descr" th:text="${recipe.description}"></div>
                     <form class="rate_form" th:action="@{/rate/{id}(id=${recipe.id})}" th:object="${recipe}" method="post">
                         <label class="form_label" for="rate">Rate this recipe</label>
-                        <input class="form_input" onchange="rangeValue.value=value" type="range" value="0" min="0" max="5" step="1" name="rate" id="rate" th:value="${rate}"/>
+                        <input class="form_input" onchange="rangeValue.value=value" type="range" min="0" max="5" step="1" name="rate" id="rate" th:value="${rate}"/>
                         <output id="rangeValue">0</output>
                         <input class="link_button" type="submit" value="Submit"/>
                     </form>
