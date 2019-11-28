@@ -19,10 +19,10 @@
             <a th:case="null"></a>
             <a class="link_button" href="/addrecipe" th:case="*">Add a recipe</a>
             <a class="link_button" href="/recipeSearch" >Search for a recipe</a>
+            <a class="link_button" href="/searchIngredients">Search by ingredients</a>
             <a class="link_button" href="/makedata">Generate data</a>
             <a class="link_button" href="/login">Login</a>
             <a class="link_button" href="/signup">Sign up</a>
-            <a class="link_button" href="/searchIngredients">Search by ingredients</a>
         </div>
     </div>
     <div class="pagewrap" th:switch="${Recipes}">

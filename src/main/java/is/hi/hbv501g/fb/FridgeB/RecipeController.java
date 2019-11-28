@@ -72,6 +72,8 @@ public class RecipeController {
     public String viewRecipe(@PathVariable("id") long id, Model model){
         Recipe recipe = recipeService.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid Recipe Id"));
         this.ingredients = recipeService.findIngredients(recipe.getIngredients());
+        recipe.setRating(recipeService.calculateRating(recipe.getRatings()));
+        recipeService.save(recipe);
         model.addAttribute("selectedRecipe", recipe);
         model.addAttribute("ingredient",this.ingredients);
         return "viewRecipe";
