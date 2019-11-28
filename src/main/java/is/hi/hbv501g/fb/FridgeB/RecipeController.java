@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -86,6 +88,24 @@ public class RecipeController {
     @RequestMapping("/recipeSearch")
     public String search(){
         return "search";
+    }
+
+    @RequestMapping("/searchIngredients")
+    public String searchI(){
+        return "searchIngredients";
+    }
+
+    @RequestMapping(value ="/searchIngredients", method = RequestMethod.POST)
+    public String searchIngredients(@RequestParam(value = "search", required = false) String search, Model model){
+        List<String> strArr = new ArrayList<String>(Arrays.asList(search.split("\\s*,\\s*")));
+        if (strArr.size() < 9) {
+            for (int i = strArr.size(); i < 9; i++) {
+                strArr.add(strArr.get(0));
+            }
+        }
+        List<Recipe> recipes = recipeService.searchByIngredients(strArr.get(0), strArr.get(1), strArr.get(2), strArr.get(3), strArr.get(4), strArr.get(5), strArr.get(6), strArr.get(7));
+        model.addAttribute("Recipes", recipes);
+        return  "home";
     }
 
     @RequestMapping(value= "/recipeSearch", method = RequestMethod.POST)
