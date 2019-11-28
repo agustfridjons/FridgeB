@@ -18,4 +18,8 @@ public interface RecipeRepo extends JpaRepository<Recipe, Long> {
 
     @Query(value = "SELECT * FROM recipe WHERE name LIKE %:key%", nativeQuery = true)
     List<Recipe> searchByKey(@Param("key") String key);
+
+    @Query(value = "SELECT * FROM recipe WHERE ingredients LIKE %:ing1% AND ingredients LIKE %:ing2% AND ingredients LIKE %:ing3% AND ingredients LIKE %:ing4% AND ingredients LIKE %:ing5% AND ingredients LIKE %:ing6% AND ingredients LIKE %:ing7% AND ingredients LIKE %:ing8%", nativeQuery = true)
+    List<Recipe> searchByIngredients(@Param("ing1") String ing1, @Param("ing2") String ing2, @Param("ing3") String ing3, @Param("ing4") String ing4, @Param("ing5") String ing5, @Param("ing6") String ing6, @Param("ing7") String ing7, @Param("ing8") String ing8);
+
  }

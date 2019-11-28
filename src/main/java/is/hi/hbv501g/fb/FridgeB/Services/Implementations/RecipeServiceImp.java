@@ -44,6 +44,11 @@ public class RecipeServiceImp implements RecipeService {
     }
 
     @Override
+    public List<Recipe> searchByIngredients(String ing1, String ing2, String ing3, String ing4, String ing5, String ing6, String ing7, String ing8) {
+        return repo.searchByIngredients(ing1, ing2, ing3, ing4, ing5, ing6, ing7, ing8);
+    }
+
+    @Override
     public Optional<Recipe> findById(long id) {
         return repo.findById(id);
     }
