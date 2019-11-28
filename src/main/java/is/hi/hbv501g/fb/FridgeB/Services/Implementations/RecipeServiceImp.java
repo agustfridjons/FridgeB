@@ -48,9 +48,12 @@ public class RecipeServiceImp implements RecipeService {
         return repo.searchByIngredients(ing1, ing2, ing3, ing4, ing5, ing6, ing7, ing8);
     }
 
+    public Optional<Recipe> findById(long id) { return repo.findById(id); }
+
     @Override
-    public Optional<Recipe> findById(long id) {
-        return repo.findById(id);
+    public void addValues(Recipe recipe){
+        recipe.setRating(0.0);
+        recipe.setRatings("");
     }
 
     @Override
@@ -58,21 +61,27 @@ public class RecipeServiceImp implements RecipeService {
         List<String> ing = new ArrayList<>();
         int c=0;
         int j = 0;
-        for(int i = 1; i < ratings.length(); i++){
+        for(int i = 0; i < ratings.length(); i++){
             j=i+1;
-            while(!String.valueOf(ratings.charAt(j)).equals(",")){
+            while(!(ratings.substring(j,j+2).equals(", "))){
+                if(j+3>(ratings.length())){
+                    j += 2;
+                    break;
+                }
                 j++;
             }
-            System.out.println(ratings.substring(i,j));
             ing.add(c, ratings.substring(i,j));
             c++;
-            i = j;
+            i = j+1;
         }
         return ing;
     }
 
     @Override
     public double calculateRating(String ratings){
+        if(ratings.equals("")||ratings == null){
+            return 0.0;
+        }
         double s = 0;
         double c = 0;
         for (int i = 0; i < ratings.length(); i++) {

@@ -16,7 +16,7 @@ public class User {
     public User() {
     }
 
-    public User(String UName, String password, Boolean admin) {
+    public User(String UName, String password, boolean admin) {
         this.UName = UName;
         this.password = password;
         this.admin = admin;

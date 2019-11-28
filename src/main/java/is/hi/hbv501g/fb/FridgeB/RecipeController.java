@@ -35,7 +35,6 @@ public class RecipeController {
     public String Home(Model model, HttpSession session){
         User sessionUser = (User) session.getAttribute("LoggedInUser");
         if(sessionUser != null){
-            System.out.println(sessionUser);
             model.addAttribute("user",sessionUser);
         }
         model.addAttribute("Recipes", recipeService.findAll());
@@ -44,13 +43,24 @@ public class RecipeController {
 
     @RequestMapping(value = "/addrecipe",method = RequestMethod.POST)
     public String addRecipe(@Valid Recipe recipe, BindingResult results, Model model){
+        recipeService.addValues(recipe);
         if(results.hasErrors()){
             model.addAttribute("error", "Not a valid recipe");
             return "add-recipe";
         }
+        String reg = "^(https://).*\\..*";
+        if(!recipe.getImg().matches(reg)){
+            model.addAttribute("error","Image link is not valid");
+            return "add-recipe";
+        }
+        reg = "^[A-Za-z0-9].*, .*";
+        if(!recipe.getIngredients().matches(reg)){
+            model.addAttribute("error","ingredients must be separated from each other with: ', '");
+            return "add-recipe";
+        }
         recipeService.save(recipe);
         model.addAttribute("Recipes", recipeService.findAll());
-        return "redirect:/";
+        return "home";
     }
 
     @RequestMapping(value = "/addrecipe", method = RequestMethod.GET)
@@ -72,7 +82,7 @@ public class RecipeController {
         Recipe recipe = recipeService.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid Recipe Id"));
         recipeService.delete(recipe);
         model.addAttribute("Recipes", recipeService.findAll());
-        return "redirect:/";
+        return "home";
     }
 
     @RequestMapping("/recipeSearch")
@@ -101,7 +111,6 @@ public class RecipeController {
     @RequestMapping(value= "/recipeSearch", method = RequestMethod.POST)
     public String searchRecipe(@RequestParam(value = "search", required = false) String search, Model model){
         List<Recipe> recipe = recipeService.searchByKey(search);
-        //System.out.println(recipe.get(0));
         model.addAttribute("Recipes", recipe);
         return "home";
     }
@@ -128,17 +137,17 @@ public class RecipeController {
         String[] img = {"https://images2.minutemediacdn.com/image/upload/c_crop,h_1126,w_2000,x_0,y_181/f_auto,q_auto,w_1100/v1554932288/shape/mentalfloss/12531-istock-637790866.jpg",
                         "https://cdn.popmenu.com/image/upload/c_limit,f_auto,h_1440,q_auto,w_1440/j7gunhkdbqkgwhpfl808.jpg",
                         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQes9Iim0-rPaLoelNDzqjuleF18o4OKQzZewSPhZTk_JpDxdz1&s"};
-        String[] food = {"Eggs 2pcs,","Beef 500g,","Milk 0.5L,"};
+        String[] food = {", Eggs 2pcs",", Beef 500g",", Milk 0.5L"};
         /*HashSet<Diet> diets = new HashSet<>();
         diets.add(Diet.CLASSIC);
         diets.add(Diet.VEGITERIAN);*/
         for (int i = 1; i <= 3; i++) {
-            this.recipeService.save(new Recipe("Good food "+i," recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with ","23544"+i,img[i-1],",Chicken 1kg,Bacon 200g,Lettuce 100g,"+food[i-1],Double.valueOf(i) /*,diets*/));
+            this.recipeService.save(new Recipe("Good food "+i," recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with recipe with ","23544"+i,img[i-1],"Chicken 1kg, Bacon 200g, Lettuce 100g"+food[i-1],Double.valueOf(i) /*,diets*/));
         }
         User tempUser = new User("Karl","pass",true);
         this.userService.save(tempUser);
         model.addAttribute("Recipes", recipeService.findAll());
-        return "redirect:/";
+        return "home";
     }
 
 }

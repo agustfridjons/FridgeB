@@ -30,18 +30,20 @@
             <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
         </div>
         <div class="container">
+            <label class="container_label" for="ingredients">Ingredients</label>
+            <input class="container_input" type="text" th:field="*{ingredients}" id="ingredients" placeholder="Ingredients, ingredients must be separated from each other with: ', ' ">
+            <span th:if="${#fields.hasErrors('ingredients')}" th:errors="*{ingredients}"></span>
+        </div>
+        <div class="container">
             <label class="container_label" for="description">Description</label>
-            <input class="container_input" type="text" th:field="*{description}" id="description" placeholder="Description">
+            <input class="container_input"type="text" th:field="*{description}" id="description" placeholder="Description">
             <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
         </div>
         <div class="container">
-            <label class="container_label" for="rating">Rating</label>
-            <input class="container_input"type="number" th:field="*{rating}" id="rating" placeholder="Rating">
-            <span th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"></span>
+            <label class="container_label" for="img">Link to image of recipe</label>
+            <input class="container_input"type="text" th:field="*{img}" id="img" placeholder="Image link">
+            <span th:if="${#fields.hasErrors('img')}" th:errors="*{img}"></span>
         </div>
-            <!--<label class="container_label" for="img">Diet</label>
-            <input class="container_input"type="text" th:field="*{diet}" id="diet" placeholder="Diet">
-            <span th:if="${#fields.hasErrors('diet')}" th:errors="*{diet}"></span>-->
         <input class="form_submit"type="submit" value="Add recipe">
     </form>
 </div>
